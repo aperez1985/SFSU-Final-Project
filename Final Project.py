@@ -19,7 +19,7 @@ box_color = (255, 255, 255)
 
 # Initialize text input and position
 user_text = ""
-text_x = 50
+text_x = 650
 text_y = 50
 
 # Define the dimensions of the coordinate plane
