@@ -118,7 +118,7 @@ while running:
 
     # Display the current user input
     font = pygame.font.Font(None, 36)
-    text = font.render(f"X: {user_input_x} Y: {user_input_y}", True, (255, 255, 255))
+    text = font.render(f"( {user_input_x} , {user_input_y} )", True, (255, 255, 255))
     screen.blit(text, (680, 110))
 
     # Plot the user-defined points
