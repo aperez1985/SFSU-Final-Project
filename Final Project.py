@@ -85,9 +85,17 @@ class Asteroid(pygame.sprite.Sprite):
 
     def spawn_random_position(self):
         # Generate a random x and y position within the coordinate plane
-        x = random.randint(160, screen_width - 160 - self.rect.width)
-        y = random.randint(100, screen_height - 100 - self.rect.height)
+        x = random.randint(160, screen_width - 160 )
+        y = random.randint(100, screen_height - 100 )
+
+
+        # Ensure that x and y are divisible by 20
+        x = (x // 20) * 20
+        y = (y // 20) * 20
+        x = x + 5
+        y = y + 10
         self.rect.topleft = (x, y)
+        print(x, y)
 
     def update(self):
         # Update the asteroid's position
