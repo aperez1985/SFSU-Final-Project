@@ -80,7 +80,6 @@ class Missile(pygame.sprite.Sprite):
 
                     # Remove the missile and asteroid from their respective groups
                     missile_group.remove(self)
-                    asteroid_group.remove(asteroid)
                     asteroid.reset_position()
 
 class Explosion(pygame.sprite.Sprite):
@@ -179,11 +178,12 @@ earth_destroyed_group.add(earth_destroyed)
 
 running = True  # Initialize the running variable
 
+missile = None  # Initialize missile here
+
+
 while running:
     # Step 1: an asteroid1.png randomly appears on the cartesian coordinate.
     asteroid.reset_position()
-
-    missile = None  # Initialize missile here
 
     while running:
         for event in pygame.event.get():
@@ -226,6 +226,10 @@ while running:
                                 asteroid_group.update()
                                 asteroid_group.draw(screen)
 
+                                # Reset missile and create a new one
+                                missile = Missile(origin_x, screen_height, target_x, target_y)
+                                missile_group.add(missile)
+
                                 missile_group.update()
                                 missile_group.draw(screen)
 
@@ -249,11 +253,9 @@ while running:
                         x, y = map(int, user_text.split(","))
                         target_x = origin_x + x * scale
                         target_y = origin_y - y * scale
-                        if missile is None:
-                            # Step 2: the user can enter an ordered pair (x, y) coordinate.
-                            # Step 3: the missile1.png is launched from the bottom center of the screen directed to the coordinate entered.
-                            missile = Missile(origin_x, screen_height, target_x, target_y)
-                            missile_group.add(missile)
+                        # Reset missile and create a new one
+                        missile = Missile(origin_x, screen_height, target_x, target_y)
+                        missile_group.add(missile)
                     except (ValueError, IndexError):
                         print("Invalid input. Please enter coordinates in the format 'x, y'.")
                     user_text = ""
@@ -299,5 +301,4 @@ while running:
         screen.blit(text_surface, (text_x, text_y))
 
         pygame.display.flip()
-
 pygame.quit()
