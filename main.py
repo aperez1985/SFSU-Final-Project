@@ -70,13 +70,14 @@ class Missile(pygame.sprite.Sprite):
             if distance != 0:
                 self.rect.x += (direction_x / distance) * self.speed
                 self.rect.y += (direction_y / distance) * self.speed
+                # Print the collision coordinates
+                asteroid_x = (asteroid.rect.x - origin_x) // scale
+                asteroid_y = (origin_y - asteroid.rect.y) // scale
+                print(f"Collision Coordinates: ({asteroid_x}, {asteroid_y})")
 
                 # Check for collision with the asteroid
-                if self.rect.colliderect(asteroid.rect):
-                    # Print the collision coordinates
-                    asteroid_x = (asteroid.rect.x - origin_x) // scale
-                    asteroid_y = (origin_y - asteroid.rect.y) // scale
-                    print(f"Collision Coordinates: ({asteroid_x}, {asteroid_y})")
+                if self.rect.colliderect(asteroid.rect) and asteroid_y == new_missile_y:
+                    
 
                     # Your code for handling the collision, such as creating an explosion
                     explosion = Explosion(self.target_x, self.target_y)
