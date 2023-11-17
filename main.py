@@ -86,8 +86,11 @@ class Missile(pygame.sprite.Sprite):
                     # Remove the missile and asteroid from their respective groups
                     missile_group.remove(self)
                     asteroid.reset_position()
-                #elif self.finished == True:
-                    #missile_group.remove(self)
+                elif asteroid_x !=new_missile_x and asteroid_y != new_missile_y:
+                    #time.delay(5)
+                    explosion = Explosion(self.target_x, self.target_y)
+                    explosion_group.add(explosion)
+                    missile_group.remove(self)
 
 
 
