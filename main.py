@@ -62,10 +62,11 @@ class Missile(pygame.sprite.Sprite):
             direction_x = self.target_x  - self.rect.centerx
             direction_y = self.target_y - self.rect.centery
             distance = ((direction_x) ** 2 + (direction_y) ** 2) ** 0.5
-            print(target_x , target_y)
+            #print(target_x , target_y)
             new_missile_x = (target_x - origin_x) // scale
             new_missile_y = (origin_y - target_y) // scale
             print(new_missile_x , new_missile_y)
+            print(self.rect.x , self.rect.y, target_x, target_y)
 
             if distance != 0:
                 self.rect.x += (direction_x / distance) * self.speed
@@ -74,6 +75,7 @@ class Missile(pygame.sprite.Sprite):
                 asteroid_x = (asteroid.rect.x - origin_x) // scale
                 asteroid_y = (origin_y - asteroid.rect.y) // scale
                 print(f"Collision Coordinates: ({asteroid_x}, {asteroid_y})")
+                
 
                 # Check for collision with the asteroid
                 if self.rect.colliderect(asteroid.rect) and asteroid_y == new_missile_y:
@@ -86,11 +88,14 @@ class Missile(pygame.sprite.Sprite):
                     # Remove the missile and asteroid from their respective groups
                     missile_group.remove(self)
                     asteroid.reset_position()
-                elif asteroid_x !=new_missile_x and asteroid_y != new_missile_y:
-                    #time.delay(5)
-                    explosion = Explosion(self.target_x, self.target_y)
-                    explosion_group.add(explosion)
-                    missile_group.remove(self)
+        if self.rect.x == target_x - 7 and self.rect.y == target_y:
+              #self.finished = True
+              # Your code for handling the collision, such as creating an explosion
+              explosion = Explosion(self.target_x, self.target_y + 10)
+              explosion_group.add(explosion)
+
+                # Remove the missile and asteroid from their respective groups
+              missile_group.remove(self)
 
 
 
