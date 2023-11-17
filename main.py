@@ -53,15 +53,19 @@ class Missile(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = (start_x, start_y)
         self.target_x = target_x
-        self.target_y = target_y
+        self.target_y = target_y +30
         self.speed = 2
         self.finished = False  # Flag to check if the missile is finished
 
     def update(self):
         if not self.finished:
-            direction_x = self.target_x - self.rect.centerx
+            direction_x = self.target_x  - self.rect.centerx
             direction_y = self.target_y - self.rect.centery
             distance = ((direction_x) ** 2 + (direction_y) ** 2) ** 0.5
+            print(target_x , target_y)
+            new_missile_x = (target_x - origin_x) // scale
+            new_missile_y = (origin_y - target_y) // scale
+            print(new_missile_x , new_missile_y)
 
             if distance != 0:
                 self.rect.x += (direction_x / distance) * self.speed
@@ -81,6 +85,11 @@ class Missile(pygame.sprite.Sprite):
                     # Remove the missile and asteroid from their respective groups
                     missile_group.remove(self)
                     asteroid.reset_position()
+                #elif self.finished == True:
+                    #missile_group.remove(self)
+
+
+
 
 class Explosion(pygame.sprite.Sprite):
     def __init__(self, x, y):
