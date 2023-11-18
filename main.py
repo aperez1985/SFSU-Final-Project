@@ -82,7 +82,7 @@ class Missile(pygame.sprite.Sprite):
                     
 
                     # Your code for handling the collision, such as creating an explosion
-                    explosion = Explosion(self.target_x, self.target_y)
+                    explosion = Explosion(self.target_x, self.target_y-20)
                     explosion_group.add(explosion)
 
                     # Remove the missile and asteroid from their respective groups
@@ -91,7 +91,7 @@ class Missile(pygame.sprite.Sprite):
         if self.rect.x == target_x - 7 and self.rect.y == target_y:
               #self.finished = True
               # Your code for handling the collision, such as creating an explosion
-              explosion = Explosion(self.target_x, self.target_y + 10)
+              explosion = Explosion(self.target_x, self.target_y-20)
               explosion_group.add(explosion)
 
                 # Remove the missile and asteroid from their respective groups
