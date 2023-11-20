@@ -45,6 +45,9 @@ font = pygame.font.Font(None, 36)
 
 coordinates = []
 
+score = 0
+life = 3
+
 class Missile(pygame.sprite.Sprite):
     def __init__(self, start_x, start_y, target_x, target_y):
         super().__init__()
@@ -88,6 +91,9 @@ class Missile(pygame.sprite.Sprite):
                     # Remove the missile and asteroid from their respective groups
                     missile_group.remove(self)
                     asteroid.reset_position()
+                    global score
+                    score = score + 10
+                    print(f"score = {score}")
         if self.rect.x == target_x - 7 and self.rect.y == target_y:
               #self.finished = True
               # Your code for handling the collision, such as creating an explosion
@@ -96,6 +102,9 @@ class Missile(pygame.sprite.Sprite):
 
                 # Remove the missile and asteroid from their respective groups
               missile_group.remove(self)
+              global life
+              life = life - 1
+              print(f"life = {life}")
 
 
 
@@ -183,7 +192,13 @@ def wait_for_restart():
                     reset_game_state()
                     earth_destroyed_group.remove(earth_destroyed)
                     break
-
+def display_score():
+    score_font = pygame.font.SysFont('times new roman', 20)
+    score_surface = score_font.render('Score: ' + str(score), True, box_color)
+    life_surface = score_font.render('Life: ' + str(life), True, box_color)
+    screen.blit(score_surface, (200, 0))
+    screen.blit(life_surface, (300, 0))
+    
 
 
 # ... (your existing imports and code)
@@ -302,6 +317,7 @@ while running:
         y_label_surface = font.render(y_label, True, (255, 255, 255))
         screen.blit(y_label_surface, (origin_x + 10, 70))
 
+        display_score()
         asteroid_group.update()
         asteroid_group.draw(screen)
 
