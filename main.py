@@ -318,6 +318,8 @@ while running and life > 0:
             show_earth_destroyed()
             show_game_over()
             pygame.time.delay(10000)  # Wait for 5 seconds before restarting
-            quit()
+            reset_game()
+            reset_game_state()
+           # quit()
 
 pygame.quit()
